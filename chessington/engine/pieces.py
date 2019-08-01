@@ -47,9 +47,11 @@ class Pawn(Piece):
         squareMoveBlack = Square.at(square.row - 1, square.col)
         squareMoveBlack2 = Square.at(square.row - 2, square.col)
         if self.player == Player.WHITE:
-            if board.get_piece(square.at(square.row + 1, square.col)) is not None:
+            if square.row == 7:  # top of board
                 return []
-            if square.row == 1:
+            if board.get_piece(square.at(square.row + 1, square.col)) is not None:  # obstruction
+                return []
+            if square.row == 1:  # starting position
                 return [
                     squareMoveWhite,
                     squareMoveWhite2
@@ -66,6 +68,8 @@ class Pawn(Piece):
                     squareMoveBlack,
                     squareMoveBlack2
                 ]
+            elif square.row == 0:
+                return []
             else:
                 return [
                     squareMoveBlack
