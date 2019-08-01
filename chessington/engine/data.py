@@ -22,7 +22,7 @@ class Square:
     col: int
 
     @classmethod
-    def at(cls, row: int, col: int):
+    def at(cls, row: int, col: int) -> object:
         """
         Provides backward compatibility with previous namedtuple implementation.
 

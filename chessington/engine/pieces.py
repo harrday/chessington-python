@@ -43,15 +43,29 @@ class Pawn(Piece):
     def get_available_moves(self, board):
         square = board.find_piece(self)
         squareMoveWhite = Square.at(square.row + 1, square.col)
+        squareMoveWhite2 = Square.at(square.row + 2, square.col)
         squareMoveBlack = Square.at(square.row - 1, square.col)
+        squareMoveBlack2 = Square.at(square.row - 2, square.col)
         if self.player == Player.WHITE:
-            return [
-                squareMoveWhite
-            ]
+            if square.row == 1:
+                return [
+                    squareMoveWhite,
+                    squareMoveWhite2
+                ]
+            else:
+                return [
+                    squareMoveWhite
+                ]
         else:
-            return [
-                squareMoveBlack
-            ]
+            if square.row == 6:
+                return [
+                    squareMoveBlack,
+                    squareMoveBlack2
+                ]
+            else:
+                return [
+                    squareMoveBlack
+                ]
 
 
 class Knight(Piece):
