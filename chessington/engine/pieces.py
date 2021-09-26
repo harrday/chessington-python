@@ -16,10 +16,16 @@ class Piece(ABC):
 
     @abstractmethod
     def get_available_moves(self, board):
-        """
-        Get all squares that the piece is allowed to move to.
-        """
-        pass
+        square = board.find_piece(self)
+        squareToMoveTo = Square.at(square.row + 1, square.col)
+        if self.player == Player.WHITE:
+            return [
+                squareToMoveTo
+            ]
+        else:
+            return [
+                square
+            ]
 
     def move_to(self, board, new_square):
         """
@@ -35,7 +41,17 @@ class Pawn(Piece):
     """
 
     def get_available_moves(self, board):
-        return []
+        square = board.find_piece(self)
+        squareMoveWhite = Square.at(square.row + 1, square.col)
+        squareMoveBlack = Square.at(square.row - 1, square.col)
+        if self.player == Player.WHITE:
+            return [
+                squareMoveWhite
+            ]
+        else:
+            return [
+                squareMoveBlack
+            ]
 
 
 class Knight(Piece):
